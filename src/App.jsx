@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, ChevronRight, ChevronLeft, Check, CheckCircle, Stethoscope, User } from 'lucide-react';
+import { Shield, ChevronRight, ChevronLeft, Check, CheckCircle, Stethoscope, User, Loader2 } from 'lucide-react';
 import { AnimatedInput } from './components/ui/AnimatedInput';
+import { supabase } from './lib/supabase';
 
 // Import de tous les questionnaires
 import questionnaire_18_25 from './data/questionnaire_18_25.json';
@@ -25,6 +26,8 @@ function App() {
     const [answers, setAnswers] = useState({});
     const [allQuestions, setAllQuestions] = useState([]);
     const [currentQuestionnaire, setCurrentQuestionnaire] = useState(null);
+    const [isSending, setIsSending] = useState(false);
+    const [sendSuccess, setSendSuccess] = useState(false);
 
     // Charger le questionnaire quand l'âge est sélectionné
     useEffect(() => {
@@ -112,15 +115,47 @@ function App() {
                     <button
                         className="button button-primary"
                         style={{ maxWidth: '400px', margin: '0 auto' }}
-                        onClick={() => {
-                            console.log('Utilisateur:', userInfo);
-                            console.log('Réponses:', answers);
-                            console.log('Questionnaire:', currentQuestionnaire?.title);
-                            alert('Fonctionnalité d\'envoi à venir (intégration Mistral AI)');
+                        onClick={async () => {
+                            if (isSending || sendSuccess) return;
+
+                            setIsSending(true);
+                            try {
+                                const { error } = await supabase
+                                    .from('bilans')
+                                    .insert({
+                                        first_name: userInfo.firstName,
+                                        last_name: userInfo.lastName,
+                                        age_range: currentQuestionnaire?.title,
+                                        answers: answers,
+                                        // analysis: "Analyse à venir..." // On pourra ajouter l'analyse ici
+                                    });
+
+                                if (error) throw error;
+
+                                setSendSuccess(true);
+                                alert("Votre bilan a bien été enregistré !");
+                            } catch (error) {
+                                console.error('Erreur lors de l\'envoi:', error);
+                                alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
+                            } finally {
+                                setIsSending(false);
+                            }
                         }}
                     >
                         Envoyer mon bilan
                     </button>
+
+                    {isSending && (
+                        <div style={{ marginTop: '1rem', color: 'var(--color-text-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                            <Loader2 className="animate-spin" size={20} /> Envoi en cours...
+                        </div>
+                    )}
+
+                    {sendSuccess && (
+                        <div style={{ marginTop: '1rem', color: 'var(--color-accent-success)', fontWeight: 500 }}>
+                            Bilan envoyé avec succès !
+                        </div>
+                    )}
 
                     <div style={{ marginTop: '2rem' }}>
                         <button
@@ -140,7 +175,7 @@ function App() {
                         </button>
                     </div>
                 </motion.div>
-            </div>
+            </div >
         );
     }
 
