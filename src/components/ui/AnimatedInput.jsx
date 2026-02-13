@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useId } from "react";
 import { motion } from "framer-motion";
 
 const containerVariants = {
@@ -31,14 +31,18 @@ export const AnimatedInput = ({
     value,
     onChange,
     className = "",
+    id,
     ...props
 }) => {
     const [isFocused, setIsFocused] = useState(false);
+    const generatedId = useId();
+    const inputId = id || generatedId;
     const showLabel = isFocused || (value && value.length > 0);
 
     return (
         <div style={{ position: "relative", width: "100%", ...props.style }} className={className}>
-            <motion.div
+            <label
+                htmlFor={inputId}
                 style={{
                     position: "absolute",
                     top: "50%",
@@ -47,26 +51,46 @@ export const AnimatedInput = ({
                     left: 0,
                     display: "flex", // Pour aligner les lettres
                 }}
-                variants={containerVariants}
-                initial="initial"
-                animate={showLabel ? "animate" : "initial"}
             >
-                {label.split("").map((char, index) => (
-                    <motion.span
-                        key={index}
-                        style={{
-                            display: "inline-block",
-                            fontSize: "0.875rem",
-                            willChange: "transform"
-                        }}
-                        variants={letterVariants}
-                    >
-                        {char === " " ? "\u00A0" : char}
-                    </motion.span>
-                ))}
-            </motion.div>
+                <motion.div
+                    variants={containerVariants}
+                    initial="initial"
+                    animate={showLabel ? "animate" : "initial"}
+                    style={{ display: "flex" }}
+                    aria-hidden="true" // Cache l'animation aux lecteurs d'écran pour éviter la lecture lettre par lettre
+                >
+                    {label.split("").map((char, index) => (
+                        <motion.span
+                            key={index}
+                            style={{
+                                display: "inline-block",
+                                fontSize: "0.875rem",
+                                willChange: "transform"
+                            }}
+                            variants={letterVariants}
+                        >
+                            {char === " " ? "\u00A0" : char}
+                        </motion.span>
+                    ))}
+                </motion.div>
+                {/* Libellé visible uniquement pour les lecteurs d'écran */}
+                <span className="sr-only" style={{
+                    position: 'absolute',
+                    width: '1px',
+                    height: '1px',
+                    padding: 0,
+                    margin: -1,
+                    overflow: 'hidden',
+                    clip: 'rect(0, 0, 0, 0)',
+                    whiteSpace: 'nowrap',
+                    borderWidth: 0
+                }}>
+                    {label}
+                </span>
+            </label>
 
             <input
+                id={inputId}
                 type="text"
                 value={value}
                 onChange={onChange}
