@@ -364,12 +364,27 @@ function App() {
     return (
         <div className="container">
             <header style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                <span style={{
+                    display: 'inline-block',
+                    padding: '0.5rem 1rem',
+                    background: 'rgba(124, 152, 133, 0.1)',
+                    color: 'var(--color-accent-success)',
+                    borderRadius: '20px',
+                    fontWeight: 500,
+                    fontSize: '0.9rem',
+                    marginBottom: '1rem'
+                }}>
+                    Prendre soin de soi est important
+                </span>
                 <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
                     <Stethoscope size={40} color="var(--color-accent-success)" />
                     Bilan Prévention
                 </h1>
-                <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.25rem' }}>
+                <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.25rem', marginBottom: '1.5rem' }}>
                     Aidez votre pharmacien à mieux vous accompagner.
+                </p>
+                <p style={{ fontSize: '0.8rem', color: 'var(--color-text-tertiary)', maxWidth: '500px', margin: '0 auto' }}>
+                    Questionnaire officiel établi par le <strong>Ministère du Travail, de la Santé et des Solidarités</strong>.
                 </p>
             </header>
 
@@ -467,6 +482,7 @@ function App() {
             </main>
 
             <footer style={{ marginTop: 'auto', paddingTop: '3rem', textAlign: 'center', color: 'var(--color-text-tertiary)', fontSize: '0.8rem' }}>
+                <p style={{ marginBottom: '0.5rem' }}>Source : Ministère du Travail, de la Santé et des Solidarités</p>
                 © 2026 - Assistant Digital Pharmacien
             </footer>
         </div>
