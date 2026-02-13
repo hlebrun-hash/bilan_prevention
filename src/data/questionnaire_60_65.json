@@ -1,0 +1,633 @@
+{
+  "ageRange": "60-65",
+  "title": "Bilan de Prévention 60-65 ans",
+  "sections": [
+    {
+      "id": "situation",
+      "title": "Situation Personnelle, Environnement Social et Familial",
+      "questions": [
+        {
+          "id": "q1",
+          "text": "Vous êtes :",
+          "type": "multiple",
+          "options": [
+            "Une femme",
+            "Un homme",
+            "Autre"
+          ],
+          "required": true
+        },
+        {
+          "id": "q2",
+          "text": "Assumez-vous un rôle d'aidant ? Aidez-vous une personne de manière régulière et fréquente, en raison de son âge, de la maladie ou d'une situation de handicap ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q3",
+          "text": "En cas de besoin, pouvez-vous compter sur une personne de votre entourage ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q4",
+          "text": "Au cours des 6 derniers mois, avez-vous eu des contacts avec des proches (amis, membres de votre famille) ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "antecedents",
+      "title": "Vos Antécédents Personnels et Familiaux",
+      "questions": [
+        {
+          "id": "q5",
+          "text": "Avez-vous ou avez-vous eu une de ces maladies ou facteurs de risques ?",
+          "type": "multiple",
+          "options": [
+            "Hypertension artérielle, diabète, cholestérol sanguin élevé",
+            "Maladies cardiovasculaires (infarctus, maladie coronaire, insuffisance cardiaque, AVC…)",
+            "Cancers",
+            "Maladies respiratoires (asthme, bronchite chronique, BPCO)",
+            "Arthrose ou maladie rhumatismale",
+            "Fractures d'une vertèbre ou du col du fémur et/ou ostéoporose",
+            "Autre(s) maladie(s)",
+            "Aucune"
+          ],
+          "required": true
+        },
+        {
+          "id": "q6",
+          "text": "À quand remonte votre dernière prise de sang et/ou une analyse d'urine ?",
+          "type": "multiple",
+          "options": [
+            "Moins de 6 mois",
+            "Plus de 6 mois"
+          ],
+          "required": true
+        },
+        {
+          "id": "q7",
+          "text": "Des personnes de votre famille proche (mère, père, sœur ou frère) sont ou ont été atteintes de maladies connues ? (diabète, hypertension artérielle, cancer, DMLA, maladie d'Alzheimer, ostéoporose, fracture du col du fémur...)",
+          "type": "multiple",
+          "options": [
+            "Oui",
+            "Non",
+            "Je ne sais pas"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "sante_actuelle",
+      "title": "Votre État de Santé Actuel",
+      "questions": [
+        {
+          "id": "q8",
+          "text": "Suivez-vous actuellement un traitement ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true,
+          "helpText": "Si oui, veuillez amener vos ordonnances lors de votre Bilan Prévention"
+        },
+        {
+          "id": "q9",
+          "text": "Taille (en mètres) :",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "q10",
+          "text": "Poids (en kg) :",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "q11",
+          "text": "Avez-vous constaté une variation de votre poids lors des 6 derniers mois ?",
+          "type": "multiple",
+          "options": [
+            "Oui, un amaigrissement",
+            "Oui, une prise de poids",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q12",
+          "text": "Avez-vous observé des gonflements importants et/ou inhabituels de vos chevilles ou de vos jambes ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q13",
+          "text": "Vous arrive-t-il d'avoir des douleurs dans la poitrine notamment lors d'un effort ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q14",
+          "text": "Toussez-vous souvent (tous les jours) ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q15",
+          "text": "Avez-vous souvent une toux grasse ou qui ramène des crachats ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q16",
+          "text": "Êtes-vous plus facilement essoufflé(e) que les personnes de votre âge ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q17",
+          "text": "Faites-vous des pauses respiratoires ou des ronflements importants lors de votre sommeil, notamment constatés par votre entourage ?",
+          "type": "multiple",
+          "options": [
+            "Oui",
+            "Non",
+            "Je ne sais pas"
+          ],
+          "required": true
+        },
+        {
+          "id": "q18",
+          "text": "Si vous êtes une femme, à quel âge avez-vous été ménopausée ?",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "q19",
+          "text": "Êtes-vous allé(e) chez le dentiste dans les 12 derniers mois ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q20",
+          "text": "Avez-vous l'impression de voir moins bien (difficultés pour lire, pour voir de loin…) ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q21",
+          "text": "Avez-vous l'impression d'entendre moins bien et/ou votre entourage a-t-il l'impression que votre audition a baissé ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q22",
+          "text": "Êtes-vous sujet à des troubles urinaires ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q23",
+          "text": "Avez-vous eu, durant les 12 derniers mois, des problèmes (courbatures, douleur, inconfort) au niveau du cou, du dos, des épaules ou des mains qui impactent votre vie quotidienne ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q24",
+          "text": "Si vous êtes toujours en activité professionnelle, jugez-vous vos conditions de travail difficiles/pénibles ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": false
+        },
+        {
+          "id": "q25",
+          "text": "Avez-vous la sensation d'oublier des choses ?",
+          "type": "boolean",
+          "options": [
+            "Oui",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q26",
+          "text": "Avez-vous l'impression d'avoir plus de difficultés à réaliser vos activités quotidiennes ?",
+          "type": "multiple",
+          "options": [
+            "Oui",
+            "Non",
+            "Je ne sais pas"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "activite_physique",
+      "title": "Activité Physique, Sédentarité et Alimentation",
+      "questions": [
+        {
+          "id": "q27",
+          "text": "Combien de fois par semaine faites-vous au moins 30 minutes d'activités physiques dynamiques au cours d'une journée (marche, ménage, jogging, vélo, jardinage, activité physique liée à votre profession, autre activité sportive, …) ?",
+          "type": "multiple",
+          "options": [
+            "Jamais",
+            "1 à 2 fois par semaine",
+            "3 à 4 fois par semaine",
+            "5 à 7 fois par semaine"
+          ],
+          "required": true
+        },
+        {
+          "id": "q28",
+          "text": "Concernant votre consommation de fruits et légumes, vous en mangez :",
+          "type": "multiple",
+          "options": [
+            "Au moins 5 portions par jour",
+            "Entre 1 et 4 portions par jour",
+            "De temps en temps",
+            "Rarement",
+            "Jamais"
+          ],
+          "required": true
+        },
+        {
+          "id": "q29",
+          "text": "À quelle fréquence consommez-vous des aliments gras/sucrés/salés (exemple : charcuterie, soda, bonbons, pâtisseries, chips, fast-food, glaces) ?",
+          "type": "multiple",
+          "options": [
+            "Plusieurs fois par jour",
+            "Plusieurs fois par semaine",
+            "Une fois par semaine",
+            "Une fois par mois",
+            "Jamais"
+          ],
+          "required": true
+        },
+        {
+          "id": "q30",
+          "text": "Combien de temps par jour passez-vous assis(e) ou allongé(e) hors période de sommeil ?",
+          "type": "multiple",
+          "options": [
+            "Moins de 2 heures",
+            "Entre 2 et 4 heures",
+            "Entre 4 et 7 heures",
+            "Plus de 7 heures",
+            "Je ne sais pas"
+          ],
+          "required": true
+        },
+        {
+          "id": "q31",
+          "text": "Combien de temps par jour passez-vous devant un écran en dehors du travail (téléphone portable, télévision, ordinateur) ?",
+          "type": "multiple",
+          "options": [
+            "Moins d'une heure",
+            "Entre 1 heure et 2 heures",
+            "Entre 2 et 4 heures",
+            "Plus de 4 heures",
+            "Je ne sais pas"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "vaccins_depistages",
+      "title": "Vaccins, Dépistages et Santé Sexuelle",
+      "questions": [
+        {
+          "id": "q32",
+          "text": "Êtes-vous à jour de vos vaccins et rappels de vaccins ?",
+          "type": "multiple",
+          "options": [
+            "Oui",
+            "Non",
+            "Je ne sais pas"
+          ],
+          "required": true,
+          "helpText": "Merci de rapporter votre carnet de vaccination lors de votre Bilan Prévention"
+        },
+        {
+          "id": "q33",
+          "text": "Avez-vous déjà réalisé un test de dépistage du cancer colorectal ?",
+          "type": "multiple",
+          "options": [
+            "Oui, il y a moins de 2 ans",
+            "Oui, il y a plus de 2 ans",
+            "Non, jamais",
+            "Je ne sais pas"
+          ],
+          "required": true
+        },
+        {
+          "id": "q34",
+          "text": "Avez-vous déjà réalisé une mammographie de dépistage du cancer du sein ?",
+          "type": "multiple",
+          "options": [
+            "Oui, il y a moins de 2 ans",
+            "Oui, il y a plus de 2 ans",
+            "Non, jamais",
+            "Je ne sais pas"
+          ],
+          "required": false
+        },
+        {
+          "id": "q34bis",
+          "text": "Avez-vous déjà réalisé un frottis de dépistage du cancer du col de l'utérus ?",
+          "type": "multiple",
+          "options": [
+            "Oui, il y a moins de 5 ans",
+            "Oui, il y a plus de 5 ans",
+            "Non, jamais",
+            "Je ne sais pas"
+          ],
+          "required": false
+        },
+        {
+          "id": "q35",
+          "text": "Êtes-vous dans l'une des situations suivantes ?",
+          "type": "multiple",
+          "options": [
+            "Plus d'un(e) partenaire sexuel(le) au cours des 12 derniers mois",
+            "Souhait d'arrêter le préservatif avec mon nouveau (ou ma nouvelle) partenaire",
+            "Mon(ma) partenaire sexuel(le) a eu un (ou plusieurs) diagnostic(s) d'infection sexuellement transmissible dans les 12 derniers mois",
+            "Rapports sexuels ces 12 derniers mois, mais non concerné(e) par une de ces trois situations ci-dessus",
+            "Non concerné(e)"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "conduites_addictives",
+      "title": "Conduites Addictives, Consommation de Boissons Alcoolisées, Tabac et Autres Substances",
+      "questions": [
+        {
+          "id": "q36",
+          "text": "Au cours de l'année écoulée, concernant votre consommation de boissons alcoolisées :",
+          "type": "multiple",
+          "options": [
+            "Vous buvez plus de 2 verres standards par jour",
+            "Vous buvez plus de 10 verres standards par semaine",
+            "Vous ne buvez pas de boissons alcoolisées au moins 2 jours dans la semaine"
+          ],
+          "required": true
+        },
+        {
+          "id": "q37",
+          "text": "Actuellement, fumez-vous (cigarette, tabac à rouler, cigare, pipe, chicha, narguilé…) ou vapotez-vous ?",
+          "type": "multiple",
+          "options": [
+            "Oui, je fume",
+            "Oui, je vapote",
+            "Non",
+            "J'ai arrêté"
+          ],
+          "required": true
+        },
+        {
+          "id": "q38",
+          "text": "Si vous avez arrêté de fumer, depuis combien de temps ?",
+          "type": "multiple",
+          "options": [
+            "Moins d'un an",
+            "Entre 1 an et 5 ans",
+            "Plus de 5 ans"
+          ],
+          "required": false
+        },
+        {
+          "id": "q39",
+          "text": "Avez-vous consommé d'autres substances au cours des 12 derniers mois ? Cannabis (haschisch, marijuana, herbe, joint ou shit) ou d'autres drogues (ecstasy, cocaïne, héroïne etc.) ?",
+          "type": "multiple",
+          "options": [
+            "Oui, du cannabis",
+            "Oui, d'autres drogues",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q40",
+          "text": "Au cours des 12 derniers mois, avez-vous misé de l'argent pour un jeu (loterie, poker, ...), un pari (sportif, hippique, ...) ?",
+          "type": "multiple",
+          "options": [
+            "Oui, souvent",
+            "Oui, de temps en temps",
+            "Oui, rarement",
+            "Non"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "sante_mentale",
+      "title": "Santé et Bien-être Mental, Violences",
+      "questions": [
+        {
+          "id": "q41",
+          "text": "Votre regard sur le fait de passer ou d'être à la retraite est :",
+          "type": "multiple",
+          "options": [
+            "Très positif",
+            "Plutôt positif",
+            "Plutôt négatif",
+            "Très négatif"
+          ],
+          "required": true
+        },
+        {
+          "id": "q42",
+          "text": "À l'approche de la retraite (ou depuis le passage à la retraite), envisagez-vous de nouveaux projets (passe-temps, sorties, associations, …) ?",
+          "type": "multiple",
+          "options": [
+            "Oui, et j'ai déjà mis en place ces projets",
+            "Oui, j'ai des projets prévus mais je ne les ai pas encore concrétisés",
+            "Non, je ne sais pas encore quels seront mes projets"
+          ],
+          "required": true
+        },
+        {
+          "id": "q43",
+          "text": "Diriez-vous que vous avez des problèmes de sommeil ?",
+          "type": "multiple",
+          "options": [
+            "Oui, souvent",
+            "Oui, parfois",
+            "Non",
+            "Vous prenez des somnifères"
+          ],
+          "required": true
+        },
+        {
+          "id": "q44",
+          "text": "Concernant le sommeil, en moyenne vous dormez :",
+          "type": "multiple",
+          "options": [
+            "Moins de 6h par nuit",
+            "Entre 6h et 10h par nuit",
+            "10h ou plus par nuit"
+          ],
+          "required": true
+        },
+        {
+          "id": "q45",
+          "text": "Au cours des 2 dernières semaines, combien de fois avez-vous eu un sentiment de nervosité, d'anxiété ou de tension ?",
+          "type": "multiple",
+          "options": [
+            "Jamais",
+            "Plusieurs jours",
+            "Plus de sept jours",
+            "Presque tous les jours"
+          ],
+          "required": true
+        },
+        {
+          "id": "q46",
+          "text": "Au cours des 2 dernières semaines, combien de fois avez-vous été incapable d'arrêter de vous inquiéter ou de contrôler vos inquiétudes ?",
+          "type": "multiple",
+          "options": [
+            "Jamais",
+            "Plusieurs jours",
+            "Plus de sept jours",
+            "Presque tous les jours"
+          ],
+          "required": true
+        },
+        {
+          "id": "q47",
+          "text": "Au cours des 2 dernières semaines, combien de fois avez-vous éprouvé peu d'intérêt ou de plaisir à faire les choses ?",
+          "type": "multiple",
+          "options": [
+            "Jamais",
+            "Plusieurs jours",
+            "Plus de sept jours",
+            "Presque tous les jours"
+          ],
+          "required": true
+        },
+        {
+          "id": "q48",
+          "text": "Au cours des 2 dernières semaines, combien de fois avez-vous éprouvé un sentiment de tristesse, de déprime ou de désespoir ?",
+          "type": "multiple",
+          "options": [
+            "Jamais",
+            "Plusieurs jours",
+            "Plus de sept jours",
+            "Presque tous les jours"
+          ],
+          "required": true
+        },
+        {
+          "id": "q49",
+          "text": "Avez-vous déjà eu des idées noires/suicidaires ou fait une tentative de suicide ?",
+          "type": "multiple",
+          "options": [
+            "Oui, des idées noires/suicidaires",
+            "Oui, une ou des tentative(s) de suicide",
+            "Non"
+          ],
+          "required": true
+        },
+        {
+          "id": "q50",
+          "text": "Avez-vous déjà été victime de violences physiques, sexuelles ou psychiques (coups, mutilations, menaces, chantage, humiliations…), harcèlements, discrimination, soumission chimique etc… ?",
+          "type": "multiple",
+          "options": [
+            "Oui",
+            "Non",
+            "Je ne sais pas"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "precisions",
+      "title": "Précisions Complémentaires Concernant Votre Santé",
+      "questions": [
+        {
+          "id": "q51",
+          "text": "Souhaitez-vous aborder un ou plusieurs sujets en priorité, avec le professionnel de santé au cours de votre Bilan Prévention ?",
+          "type": "multiple",
+          "options": [
+            "Mieux dormir",
+            "Améliorer mon alimentation et bouger plus",
+            "Réduire ou arrêter ma consommation de tabac",
+            "Réduire ou arrêter ma consommation d'alcool",
+            "Améliorer mon bien-être mental, réduire mon stress ou mon anxiété",
+            "Mieux connaitre / comprendre / prévenir les effets du vieillissement",
+            "Mieux m'informer sur les dépistages concernant ma tranche d'âge"
+          ],
+          "required": false
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2026-02-13",
+    "totalQuestions": 51,
+    "source": "Assurance Maladie - Bilan de Prévention 60-65 ans"
+  }
+}

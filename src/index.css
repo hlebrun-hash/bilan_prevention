@@ -1,0 +1,100 @@
+:root {
+  /* Design Tokens from Phase 0 */
+  --color-bg-primary: #F6F4EE;
+  --color-bg-secondary: #FAF0E6;
+  --color-bg-elevated: #FFFFFF;
+  
+  --color-text-primary: #2C2C2C;
+  --color-text-secondary: #5A5A5A;
+  --color-text-tertiary: #8B8B8B;
+  
+  --color-accent-success: #7C9885;
+  --color-accent-progress: #B8956A;
+  --color-accent-warning: #D4A574;
+  --color-accent-error: #C17B6B;
+  
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Base Components Styles */
+.card {
+  background: var(--color-bg-elevated);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  width: 100%;
+  font-family: var(--font-body);
+}
+
+.button-primary {
+  background-color: var(--color-accent-success);
+  color: white;
+  box-shadow: 0 2px 8px rgba(124, 152, 133, 0.2);
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 152, 133, 0.3);
+}
+
+.button-primary:active {
+  transform: translateY(0);
+}
+
+.button-secondary {
+  background-color: transparent;
+  border: 2px solid var(--color-text-tertiary);
+  color: var(--color-text-primary);
+}
+
+.button-secondary:hover {
+  border-color: var(--color-accent-success);
+  color: var(--color-accent-success);
+}

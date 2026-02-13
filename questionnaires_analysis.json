@@ -1,0 +1,74 @@
+{
+  "18-25ans": {
+    "age_range": "18-25ans",
+    "raw_text_length": 11177,
+    "questions_found": 43,
+    "sample_questions": [
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui   Non",
+      "  Oui"
+    ],
+    "full_text_preview": "Situation personnelle, environnement social et familialPrendre soin de soi est important\nC’est pourquoi entre 18 et 25 ans, il est recommandé \nde faire le point sur sa santé avec un professionnel \nde santé (médecin, infirmier, sage-femme ou  \npharmacien). Ce Bilan Prévention, recommandé, est \ntotalement pris en charge par l’assurance maladie.Répondez dès à présent au questionnaire ci-dessous \nafin de préparer votre Bilan Prévention. Vous n’êtes \npas obligé(e) de répondre à toutes les questions ci-\ndessous, certaines pourront être abordées directement \navec le professionnel de santé si vous le souhaitez. \nVos antécédents personnels et familiauxQ1 - Vous êtes :  \n  Une femme    Un homme\n \nQ2 - Vous êtes :\n  En études    En emploi\n  À la recherche d’un emploi\n  En cumul étude-emploi\n  Autre\nQ3 - Vous habitez : \n  Seul(e)    Chez vos parents\n  En couple\n   Avec d’autres personnes  \n(amis, colocataires, …)\nQ4 - Avez-vous un ou plusieurs enfants ?\n  Oui    Non\n \n \n \n \n Q10 - Avez-vous ou avez-vous eu une de ces \nmaladies ?\n  Diabète\n  Maladie congénitale\n  Allergie(s)\n  Cancers\n  Maladies respiratoires (asthme…) \n  Dépression et/ou troubles anxieux\net/ou troubles du comportement \nalimentaire (anorexie, boulimie…)\n  Autre(s) maladie(s) :\n  AucuneQ5 - Si oui, êtes-vous seul(e) pour l’élever ou  \nles élever ?\n  Oui    Non\nQ6 - Envisagez-vous d’avoir un enfant dans les 5  \nprochaines années ?\n  Oui    Non    Je ne sais pas\nQ7 - Assumez-vous un rôle d’aidant, c’est-à-\ndire aidez-vous une personne (adolescente ou \nadulte) de manière régulière et fréquente,en \nraison de son âge, de la maladie ou d’une \nsituation de handicap ?\n  Oui    Non\nQ8 - En cas de besoin, pouvez-vous compter sur \nune personne de votre entourage ?\n  Oui    Non\nQ9 - Jugez-vous vos conditions de vie, de travail \nou d’étude difficiles/pénibles ?\n  Oui    Non\nQ11 - Avez-vous déjà été hospitalisé(e) ?\n  Oui    Non\nQ12 - À quand remonte votre dernière prise  \nde sang et/ou une analyse d’urine ?\n  Moins de 6 mois "
+  },
+  "45-50ans": {
+    "age_range": "45-50ans",
+    "raw_text_length": 11569,
+    "questions_found": 42,
+    "sample_questions": [
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui",
+      "  Oui",
+      "  Non"
+    ],
+    "full_text_preview": "Situation personnelle, environnement social et familial\nVos antécédents personnels et familiauxPrendre soin de soi est important\nC’est pourquoi entre 45 et 50 ans, il est recommandé \nde faire le point sur sa santé avec un professionnel \nde santé (médecin, infirmier, sage-femme ou  \npharmacien). Ce Bilan Prévention, recommandé, est \ntotalement pris en charge par l’assurance maladie.Répondez dès à présent au questionnaire ci-dessous \nafin de préparer votre Bilan Prévention. Vous n’êtes \npas obligé(e) de répondre à toutes les questions ci-\ndessous, certaines pourront être abordées directement \navec le professionnel de santé si vous le souhaitez.\n Votre état de santé actuel\nQ10 - Suivez-vous actuellement un traitement ?  \n  Oui    Non\nSi oui, merci d’apporter, si possible, vos \nordonnances lors de votre Bilan Prévention.Q1 - Vous êtes :  \n  Une femme    Un homme\n \nQ2 - Avez-vous un ou plusieurs enfants à la \nmaison ?\n  Oui    Non\nQ3 - Si oui, les élevez-vous seul(e) ?  \n  Oui    NonQ4 - Assumez-vous un rôle d’aidant ? \nAidez-vous une personne de manière régulière \net fréquente, en raison de son âge, de la \nmaladie ou d’une situation de handicap ?\n  Oui    Non\nQ5 - En cas de besoin, pouvez-vous compter sur \nune personne de votre entourage ?\n  Oui    Non\nQ6 - Vos conditions de vie et/ou de travail \nsont-elles difficiles/pénibles ?\n  Oui    Non\n \n \n \n Q7 - Avez-vous ou avez-vous eu une de ces \nmaladies ou facteurs de risques ?\n  Hypertension artérielle, diabète, cholestérol \nsanguin élevé\n  Maladies cardiovasculaires (infarctus, maladie \ncoronaire, insuffisance cardiaque, AVC…)\n  Cancers\n  Maladies respiratoires (asthme, bronchite\nchronique, BPCO)\n  Maladie inflammatoire chronique de l’intestin\n(maladie de Crohn, rectocolite hémorragique) \n  Autre(s) maladie(s) : \n  AucuneQ\n11 - Taille :               m \nQ12 - Poids :              kgQ8 - À quand remonte votre dernière prise  \nde sang et/ou une analyse d’urine ?\n  Moins de 6 mois\n  Plus de 6 mois\nMerci d’en rapporter les ré"
+  },
+  "60-65ans": {
+    "age_range": "60-65ans",
+    "raw_text_length": 12586,
+    "questions_found": 52,
+    "sample_questions": [
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui",
+      "  Oui",
+      "  Non",
+      "  Oui   Non",
+      "  Oui   Non"
+    ],
+    "full_text_preview": "Situation personnelle, environnement social et familial\nVos antécédents personnels et familiauxPrendre soin de soi est important\nC’est pourquoi entre 60 et 65 ans, il est recommandé \n \nde santé (médecin, infirmier, sage-femme ou  \npharmacien). Ce Bilan Prévention, recommandé, est \ntotalement pris en charge par l’assurance maladie.Répondez dès à présent au questionnaire ci-dessous \nafin de préparer votre Bilan Prévention. Vous n’êtes \npas obligé(e) de répondre à toutes les questions ci-\ndessous, certaines pourront être abordées directement \navec le professionnel de santé si vous le souhaitez. \nVotre état de santé actuel\nQ8 - Suivez-vous actuellement un traitement ?  \n  Oui    Non\nSi oui, veuillez amener, si possible, vos \nordonnances lors de votre Bilan Prévention.Q1 - Vous êtes :  \n  Une femme    Un homme\n \nQ2 - Assumez-vous un rôle d’aidant ? \nAidez-vous une personne de manière régulière et \nfréquente, en raison de son âge, de la maladie ou \nd’une situation de handicap ?\n  Oui    Non\n \n \n \n Q5 - Avez-vous ou avez-vous eu une de ces \nmaladies ou facteurs de risques ?\n  Hypertension artérielle, diabète, cholestérol \nsanguin élevé\n  Maladies cardiovasculaires (infarctus, maladie \ncoronaire, insuffisance cardiaque, AVC…)\n  Cancers\n  Maladies respiratoires (asthme, bronchite\nchronique, BPCO)\n  Arthrose ou maladie rhumatismale\n  Fractures d’une vertèbre ou du col du fémur \net/ou ostéoporose\n  Autre(s) maladie(s) :\n  AucuneQ3 - En cas de besoin, pouvez-vous compter sur \nune personne de votre entourage ?\n  Oui    Non\nQ4 - Au cours des 6 derniers mois, avez-vous eu \ndes contacts avec des proches (amis, membres \nde votre famille) ?\n  Oui    NonQ\n9 - Taille :                m \nQ10 - Poids :              kgQ6 - À quand remonte votre dernière prise  \nde sang et/ou une analyse d’urine ?\n  Moins de 6 mois\n  Plus de 6 mois\nMerci d’en rapporter les résultats, si possible, \nlors de votre Bilan Prévention.\nQ7 - Des personnes de votre famille proche \n(mère, père, sœur ou frère) sont o"
+  },
+  "70-75ans": {
+    "age_range": "70-75ans",
+    "raw_text_length": 13027,
+    "questions_found": 50,
+    "sample_questions": [
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui    Non",
+      "  Oui",
+      "  Oui",
+      "  Non",
+      "  Oui   Non",
+      "  Oui   Non"
+    ],
+    "full_text_preview": "Situation personnelle, environnement social et familial\nVos antécédents personnels et familiauxPrendre soin de soi est important\nC’est pourquoi entre 70 et 75 ans, il est recommandé \nde faire le point sur sa santé avec un professionnel \nde santé (médecin, infirmier, sage-femme ou  \npharmacien). Ce Bilan Prévention, recommandé, est \ntotalement pris en charge par l’assurance maladie.Répondez dès à présent au questionnaire ci-dessous \nafin de préparer votre Bilan Prévention. Vous n’êtes \npas obligé(e) de répondre à toutes les questions ci-\ndessous, certaines pourront être abordées directement \navec le professionnel de santé si vous le souhaitez. \nVotre état de santé actuel\nQ8 - Suivez-vous actuellement un traitement ?  \n  Oui    Non\nSi oui, veuillez amener, si possible, vos \nordonnances lors de votre Bilan Prévention.Q1 - Vous êtes :  \n  Une femme    Un homme\n \nQ2 - Assumez-vous un rôle d’aidant ? \nAidez-vous une personne de manière régulière et \nfréquente, en raison de son âge, de la maladie ou \nd’une situation de handicap ?\n  Oui    NonQ3 - En cas de besoin, pouvez-vous compter sur \nune personne de votre entourage ?\n  Oui    Non\nQ4 - Au cours des 6 derniers mois, avez-vous eu \ndes contacts avec des proches (amis, membres \nde votre famille) ?\n  Oui    NonQ\n9 - Taille :                m \nQ10 - Poids :              kg \n \n \n Q5 - Avez-vous ou avez-vous eu une de ces \nmaladies ou facteurs de risques ?\n  Hypertension artérielle, diabète, cholestérol \nsanguin élevé\n  Maladies cardiovasculaires (infarctus, maladie \ncoronaire, insuffisance cardiaque, AVC…)\n  Cancers\n  Maladies respiratoires (asthme, bronchite\nchronique, BPCO)\n  Arthrose ou maladie rhumatismale\n  Fractures d’une vertèbre ou du col du fémur \net/ou ostéoporose\n  Autre(s) maladie(s) :\n  AucuneQ6 - À quand remonte votre dernière prise  \nde sang et/ou une analyse d’urine ?\n  Moins de 6 mois\n  Plus de 6 mois\nMerci d’en rapporter les résultats, si possible, \nlors de votre Bilan Prévention.\nQ7 - Des personnes de votre"
+  }
+}
