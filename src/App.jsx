@@ -1,21 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, ChevronRight, ChevronLeft, Check, CheckCircle, Stethoscope, User, Loader2 } from 'lucide-react';
 import { AnimatedInput } from './components/ui/AnimatedInput';
 import { supabase } from './lib/supabase';
 
-// Import de tous les questionnaires
-import questionnaire_18_25 from './data/questionnaire_18_25.json';
-// ... reste inchangé ...
-import questionnaire_45_50 from './data/questionnaire_45_50.json';
-import questionnaire_60_65 from './data/questionnaire_60_65.json';
-import questionnaire_70_75 from './data/questionnaire_70_75.json';
+// Lazy load des questionnaires pour réduire le bundle initial
+const loadQuestionnaire = (ageRange) => {
+    switch (ageRange) {
+        case '18-25':
+            return import('./data/questionnaire_18_25.json');
+        case '45-50':
+            return import('./data/questionnaire_45_50.json');
+        case '60-65':
+            return import('./data/questionnaire_60_65.json');
+        case '70-75':
+            return import('./data/questionnaire_70_75.json');
+        default:
+            return Promise.reject(new Error('Invalid age range'));
+    }
+};
+
 
 const ageRanges = [
-    { id: '18-25', label: '18-25 ans', questionnaire: questionnaire_18_25 },
-    { id: '45-50', label: '45-50 ans', questionnaire: questionnaire_45_50 },
-    { id: '60-65', label: '60-65 ans', questionnaire: questionnaire_60_65 },
-    { id: '70-75', label: '70-75 ans', questionnaire: questionnaire_70_75 }
+    { id: '18-25', label: '18-25 ans' },
+    { id: '45-50', label: '45-50 ans' },
+    { id: '60-65', label: '60-65 ans' },
+    { id: '70-75', label: '70-75 ans' }
 ];
 
 function App() {
@@ -32,22 +42,26 @@ function App() {
     // Charger le questionnaire quand l'âge est sélectionné
     useEffect(() => {
         if (selectedAge) {
-            const ageRange = ageRanges.find(range => range.id === selectedAge);
-            if (ageRange) {
-                setCurrentQuestionnaire(ageRange.questionnaire);
+            loadQuestionnaire(selectedAge)
+                .then(module => {
+                    const questionnaire = module.default;
+                    setCurrentQuestionnaire(questionnaire);
 
-                // Aplatir toutes les questions
-                const questions = [];
-                ageRange.questionnaire.sections.forEach(section => {
-                    section.questions.forEach(question => {
-                        questions.push({
-                            ...question,
-                            sectionTitle: section.title
+                    // Aplatir toutes les questions
+                    const questions = [];
+                    questionnaire.sections.forEach(section => {
+                        section.questions.forEach(question => {
+                            questions.push({
+                                ...question,
+                                sectionTitle: section.title
+                            });
                         });
                     });
+                    setAllQuestions(questions);
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement du questionnaire:', error);
                 });
-                setAllQuestions(questions);
-            }
         }
     }, [selectedAge]);
 
