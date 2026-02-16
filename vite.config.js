@@ -6,7 +6,14 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true, // Écoute sur toutes les adresses, y compris LAN
-    port: 5173
+    port: 5173,
+    proxy: {
+      '/mistral-api': {
+        target: 'https://api.mistral.ai/v1',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/mistral-api/, ''),
+      },
+    }
   },
   build: {
     chunkSizeWarningLimit: 1000, // Augmente la limite à 1000 kB
