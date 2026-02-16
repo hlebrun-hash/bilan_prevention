@@ -211,7 +211,7 @@ function App() {
                                 alert("Votre bilan a bien été enregistré !");
                             } catch (error) {
                                 console.error('Erreur lors de l\'envoi:', error);
-                                alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
+                                alert(`Une erreur est survenue lors de l'envoi: ${error.message || error.details || JSON.stringify(error)}. Veuillez vérifier votre connexion et vos identifiants.`);
                             } finally {
                                 setIsSending(false);
                             }
