@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mistralai/mistralai": "^1.14.0",
     "@supabase/supabase-js": "^2.95.3",
     "@vercel/analytics": "^1.6.1",
     "framer-motion": "latest",

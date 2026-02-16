@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, ChevronRight, ChevronLeft, Check, CheckCircle, Stethoscope, User, Loader2 } from 'lucide-react';
 import { AnimatedInput } from './components/ui/AnimatedInput';
 import { supabase } from './lib/supabase';
+import { generatePharmacistAnalysis } from './lib/mistral';
 
 // Lazy load des questionnaires pour réduire le bundle initial
 const loadQuestionnaire = (ageRange) => {
@@ -134,6 +135,19 @@ function App() {
 
                             setIsSending(true);
                             try {
+                                // Générer l'analyse avec Mistral
+                                let analysisResult = null;
+                                try {
+                                    // Utiliser allQuestions pour avoir le texte des questions
+                                    analysisResult = await generatePharmacistAnalysis(answers, allQuestions, {
+                                        firstName: userInfo.firstName,
+                                        lastName: userInfo.lastName,
+                                        ageRange: currentQuestionnaire?.title
+                                    });
+                                } catch (mistralError) {
+                                    console.error("Erreur Mistral (non bloquante):", mistralError);
+                                }
+
                                 const { error } = await supabase
                                     .from('bilans')
                                     .insert({
@@ -141,7 +155,7 @@ function App() {
                                         last_name: userInfo.lastName,
                                         age_range: currentQuestionnaire?.title,
                                         answers: answers,
-                                        // analysis: "Analyse à venir..." // On pourra ajouter l'analyse ici
+                                        analysis: analysisResult // Sauvegarder l'analyse générée
                                     });
 
                                 if (error) throw error;
