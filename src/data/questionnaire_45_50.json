@@ -35,7 +35,11 @@
                         "Oui",
                         "Non"
                     ],
-                    "required": false
+                    "required": false,
+                    "condition": {
+                        "questionId": "q2",
+                        "value": "Oui"
+                    }
                 },
                 {
                     "id": "q4",
@@ -211,7 +215,11 @@
                         "Je suis déjà ménopausée",
                         "Non concerné(e)"
                     ],
-                    "required": false
+                    "required": false,
+                    "condition": {
+                        "questionId": "q1",
+                        "value": "Une femme"
+                    }
                 },
                 {
                     "id": "q20",
@@ -344,14 +352,17 @@
                 {
                     "id": "q30",
                     "text": "Avez-vous réalisé un test de dépistage du cancer colorectal et/ou une mammographie de dépistage du cancer du sein ?",
-                    "type": "multiple",
                     "options": [
                         "Oui",
                         "Non",
                         "Je ne sais pas"
                     ],
                     "required": true,
-                    "helpText": "Si oui, merci de rapporter les résultats de ces dépistages lors de votre Bilan Prévention"
+                    "helpText": "Si oui, merci de rapporter les résultats de ces dépistages lors de votre Bilan Prévention",
+                    "condition": {
+                        "questionId": "q1",
+                        "value": "Des questions spécifiques seront posées selon votre sexe"
+                    }
                 },
                 {
                     "id": "q31",
@@ -364,7 +375,11 @@
                         "Je ne sais pas"
                     ],
                     "required": false,
-                    "helpText": "Si oui, merci de rapporter les résultats du prélèvement"
+                    "helpText": "Si oui, merci de rapporter les résultats du prélèvement",
+                    "condition": {
+                        "questionId": "q1",
+                        "value": "Une femme"
+                    }
                 },
                 {
                     "id": "q32",

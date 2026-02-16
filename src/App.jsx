@@ -66,19 +66,50 @@ function App() {
         }
     }, [selectedAge]);
 
+
+    // Helper pour vérifier si une question doit être affichée
+    const isQuestionVisible = (question, currentAnswers) => {
+        if (!question.condition) return true;
+
+        const dependentAnswer = currentAnswers[question.condition.questionId];
+
+        // Si la question dépendante n'a pas encore de réponse, on cache par défaut
+        // (Sauf si on veut une logique différente, mais pour un flux séquentiel c'est mieux)
+        if (dependentAnswer === undefined) return false;
+
+        // Gérer les réponses multiples (tableau) ou simples (string/boolean)
+        if (Array.isArray(dependentAnswer)) {
+            return dependentAnswer.includes(question.condition.value);
+        }
+        return dependentAnswer === question.condition.value;
+    };
+
     const handleStartQuestionnaire = () => {
         if (selectedAge && userInfo.firstName && userInfo.lastName && allQuestions.length > 0) {
             setCurrentScreen('questionnaire');
+            // S'assurer de commencer sur une question visible
+            let startIndex = 0;
+            while (startIndex < allQuestions.length && !isQuestionVisible(allQuestions[startIndex], {})) {
+                startIndex++;
+            }
+            setCurrentQuestionIndex(startIndex);
         }
     };
 
     const handleAnswer = (questionId, answer) => {
-        setAnswers({ ...answers, [questionId]: answer });
+        const newAnswers = { ...answers, [questionId]: answer };
+        setAnswers(newAnswers);
 
         // Passer à la question suivante après un court délai
         setTimeout(() => {
-            if (currentQuestionIndex < allQuestions.length - 1) {
-                setCurrentQuestionIndex(currentQuestionIndex + 1);
+            let nextIndex = currentQuestionIndex + 1;
+            // Trouver la prochaine question visible
+            while (nextIndex < allQuestions.length && !isQuestionVisible(allQuestions[nextIndex], newAnswers)) {
+                nextIndex++;
+            }
+
+            if (nextIndex < allQuestions.length) {
+                setCurrentQuestionIndex(nextIndex);
             } else {
                 // Toutes les questions sont répondues
                 setCurrentScreen('completion');
@@ -87,8 +118,14 @@ function App() {
     };
 
     const handlePrevious = () => {
-        if (currentQuestionIndex > 0) {
-            setCurrentQuestionIndex(currentQuestionIndex - 1);
+        let prevIndex = currentQuestionIndex - 1;
+        // Trouver la question précédente visible
+        while (prevIndex >= 0 && !isQuestionVisible(allQuestions[prevIndex], answers)) {
+            prevIndex--;
+        }
+
+        if (prevIndex >= 0) {
+            setCurrentQuestionIndex(prevIndex);
         }
     };
 
@@ -97,7 +134,17 @@ function App() {
     }
 
     const currentQuestion = allQuestions[currentQuestionIndex];
-    const progress = allQuestions.length > 0 ? Math.round(((currentQuestionIndex + 1) / allQuestions.length) * 100) : 0;
+
+    // Calcul de progression dynamique
+    const visibleQuestionsCount = allQuestions.filter(q => isQuestionVisible(q, answers)).length;
+
+    // On doit calculer combien de questions visibles on a passé ou est dessus
+    const currentVisibleIndex = allQuestions
+        .slice(0, currentQuestionIndex + 1)
+        .filter(q => isQuestionVisible(q, answers))
+        .length;
+
+    const progress = visibleQuestionsCount > 0 ? Math.round((currentVisibleIndex / visibleQuestionsCount) * 100) : 0;
 
     // Écran de complétion
     if (currentScreen === 'completion') {

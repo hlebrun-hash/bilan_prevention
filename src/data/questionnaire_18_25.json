@@ -60,7 +60,11 @@
                         "Oui",
                         "Non"
                     ],
-                    "required": false
+                    "required": false,
+                    "condition": {
+                        "questionId": "q4",
+                        "value": "Oui"
+                    }
                 },
                 {
                     "id": "q6",
@@ -336,7 +340,11 @@
                         "Non",
                         "Je ne sais pas"
                     ],
-                    "required": false
+                    "required": false,
+                    "condition": {
+                        "questionId": "q1",
+                        "value": "Une femme"
+                    }
                 },
                 {
                     "id": "q29",
@@ -347,7 +355,11 @@
                         "Non",
                         "Non concerné(e)"
                     ],
-                    "required": false
+                    "required": false,
+                    "condition": {
+                        "questionId": "q1",
+                        "value": "Une femme"
+                    }
                 },
                 {
                     "id": "q30",
@@ -368,7 +380,11 @@
                         "Non",
                         "Non concerné(e)"
                     ],
-                    "required": false
+                    "required": false,
+                    "condition": {
+                        "questionId": "q1",
+                        "value": "Une femme"
+                    }
                 },
                 {
                     "id": "q32",

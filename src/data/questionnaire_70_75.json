@@ -196,7 +196,11 @@
                     "id": "q18",
                     "text": "Si vous êtes une femme, à quel âge avez-vous été ménopausée ?",
                     "type": "text",
-                    "required": false
+                    "required": false,
+                    "condition": {
+                        "questionId": "q1",
+                        "value": "Une femme"
+                    }
                 },
                 {
                     "id": "q19",
@@ -423,7 +427,11 @@
                         "Je ne sais pas"
                     ],
                     "required": false,
-                    "helpText": "Si oui, merci de rapporter les résultats de ce dépistage lors de votre Bilan Prévention"
+                    "helpText": "Si oui, merci de rapporter les résultats de ce dépistage lors de votre Bilan Prévention",
+                    "condition": {
+                        "questionId": "q1",
+                        "value": "Une femme"
+                    }
                 },
                 {
                     "id": "q36",
