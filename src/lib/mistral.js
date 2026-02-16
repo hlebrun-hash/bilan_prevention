@@ -2,7 +2,9 @@
 // import { Mistral } from '@mistralai/mistralai'; // SDK supprimé pour éviter les problèmes CORS/Browser
 
 // Utiliser VITE_MISTRAL_API_KEY
+console.log("Environment variables:", import.meta.env);
 const apiKey = import.meta.env.VITE_MISTRAL_API_KEY;
+console.log("Mistral API Key loaded:", apiKey ? "Yes (starts with " + apiKey.substring(0, 4) + ")" : "No");
 
 if (!apiKey) {
     console.error("VITE_MISTRAL_API_KEY is missing!");
