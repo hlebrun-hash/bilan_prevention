@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/mistral-api/:path*",
+            "destination": "https://api.mistral.ai/v1/:path*"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}
