@@ -26,7 +26,7 @@ export async function generatePharmacistAnalysis(answers, questions, userInfo) {
         }
 
         // 1. Formater les données pour le prompt
-        let patientDataText = `Patient: ${userInfo.firstName} ${userInfo.lastName}, Tranche d'âge: ${userInfo.ageRange}\n\n`;
+        let patientDataText = `Patient: ${userInfo.firstName} ${userInfo.lastName}\nSexe: ${userInfo.gender || "Non spécifié"}\nTranche d'âge: ${userInfo.ageRange}\n\n`;
 
         // Créer une map pour retrouver facilement le texte des questions
         // On suppose que 'questions' contient tous les objets questions avec 'id' et 'text'

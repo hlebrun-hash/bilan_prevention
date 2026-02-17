@@ -235,7 +235,8 @@ function App() {
                                     generatePharmacistAnalysis(answers, allQuestions, {
                                         firstName: userInfo.firstName,
                                         lastName: userInfo.lastName,
-                                        ageRange: currentQuestionnaire?.title
+                                        ageRange: currentQuestionnaire?.title,
+                                        gender: userInfo.gender
                                     })
                                         .then(analysisResult => {
                                             // Mettre à jour le bilan avec l'analyse générée
