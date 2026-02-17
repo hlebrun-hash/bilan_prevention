@@ -290,7 +290,8 @@ function App() {
                                             console.log("✅ Analyse Mistral générée et sauvegardée avec succès");
                                         })
                                         .catch(mistralError => {
-                                            console.warn("⚠️ L'analyse automatique n'a pas pu être générée (non critique):", mistralError);
+                                            console.error("❌ Erreur lors de la génération de l'analyse Mistral:", mistralError);
+                                            alert("⚠️ Votre bilan a été enregistré, mais l'analyse automatique n'a pas pu être générée. Le pharmacien pourra quand même consulter vos réponses.");
                                         });
                                 }
 

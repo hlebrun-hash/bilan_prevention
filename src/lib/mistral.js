@@ -84,17 +84,31 @@ Analyse les réponses fournies ci-dessus et génère les conseils pharmaciens co
 
         if (!response.ok) {
             const errorText = await response.text();
-            throw new Error(`Mistral API Error via Proxy: ${response.status} - ${errorText}`);
+            console.error("❌ Erreur Mistral API:", {
+                status: response.status,
+                statusText: response.statusText,
+                errorText: errorText
+            });
+            throw new Error(`Mistral API Error: ${response.status} - ${errorText}`);
         }
 
         const data = await response.json();
+        console.log("✅ Réponse Mistral reçue:", {
+            hasChoices: !!data.choices,
+            choicesLength: data.choices?.length,
+            hasContent: !!data.choices?.[0]?.message?.content
+        });
+
         const advice = data.choices[0].message.content;
-        console.log("Réponse Mistral reçue avec succès.");
+        console.log("✅ Analyse générée avec succès, longueur:", advice.length, "caractères");
         return advice;
 
     } catch (error) {
-        console.error("Erreur lors de la génération de l'analyse Mistral (Détails):", error);
-        // Retourner l'erreur technique pour aider au débogage si besoin, ou un message utilisateur
-        return `L'analyse automatique n'a pas pu être générée. Raison: ${error.message}`;
+        console.error("❌ Erreur lors de la génération de l'analyse Mistral:", {
+            message: error.message,
+            stack: error.stack,
+            fullError: error
+        });
+        throw error; // Re-throw pour que App.jsx puisse l'attraper
     }
 }
