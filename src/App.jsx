@@ -83,8 +83,9 @@ function App() {
 
     // Helper pour vérifier si une question doit être affichée
     const isQuestionVisible = (question, currentAnswers) => {
-        // Filtrage par sexe
-        if (question.gender && question.gender !== userInfo.gender) {
+        // Filtrage par sexe : on ne filtre que si un genre binaire est défini
+        // Si "Autre" ou non défini, on affiche toutes les questions par prudence
+        if (question.gender && userInfo.gender && userInfo.gender !== 'Autre' && question.gender !== userInfo.gender) {
             return false;
         }
 
@@ -128,13 +129,13 @@ function App() {
         // Mise à jour automatique du genre si la question est Q1 ou concerne le sexe
         if (questionId === 'q1' || questionId === 'sex' || questionId === 'gender') {
             let detectedGender = '';
-            if (typeof answer === 'string') {
-                if (answer.toLowerCase().includes('femme')) detectedGender = 'Femme';
-                else if (answer.toLowerCase().includes('homme')) detectedGender = 'Homme';
-            } else if (Array.isArray(answer)) {
-                if (answer.some(a => a.toLowerCase().includes('femme'))) detectedGender = 'Femme';
-                else if (answer.some(a => a.toLowerCase().includes('homme'))) detectedGender = 'Homme';
-            }
+            // Simplification et support de "Autre"
+            const ansStr = Array.isArray(answer) ? answer.join(' ') : String(answer);
+            const ansLower = ansStr.toLowerCase();
+
+            if (ansLower.includes('femme')) detectedGender = 'Femme';
+            else if (ansLower.includes('homme')) detectedGender = 'Homme';
+            else if (ansLower.includes('autre')) detectedGender = 'Autre';
 
             if (detectedGender) {
                 console.log("Genre détecté et mis à jour :", detectedGender);
@@ -152,13 +153,15 @@ function App() {
 
             let tempUserInfo = { ...userInfo };
             if (questionId === 'q1' || questionId === 'sex') {
-                if (String(answer).toLowerCase().includes('femme')) tempUserInfo.gender = 'Femme';
-                else if (String(answer).toLowerCase().includes('homme')) tempUserInfo.gender = 'Homme';
+                const ansStr = Array.isArray(answer) ? answer.join(' ') : String(answer);
+                if (ansStr.toLowerCase().includes('femme')) tempUserInfo.gender = 'Femme';
+                else if (ansStr.toLowerCase().includes('homme')) tempUserInfo.gender = 'Homme';
+                else if (ansStr.toLowerCase().includes('autre')) tempUserInfo.gender = 'Autre';
             }
 
             // Fonction locale pour vérifier la visibilité avec le genre mis à jour instantanément
             const checkVisibility = (q) => {
-                if (q.gender && q.gender !== tempUserInfo.gender && tempUserInfo.gender) return false;
+                if (q.gender && tempUserInfo.gender && tempUserInfo.gender !== 'Autre' && q.gender !== tempUserInfo.gender) return false;
                 // Reste de la logique isQuestionVisible...
                 if (!q.condition) return true;
                 const depAnswer = newAnswers[q.condition.questionId];

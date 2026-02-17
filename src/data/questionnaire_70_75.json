@@ -12,7 +12,8 @@
                     "type": "multiple",
                     "options": [
                         "Une femme",
-                        "Un homme"
+                        "Un homme",
+                        "Autre"
                     ],
                     "required": true
                 },
