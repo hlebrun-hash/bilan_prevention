@@ -630,10 +630,10 @@ function App() {
 
                     <button
                         className="button button-primary"
-                        disabled={!selectedAge || !userInfo.firstName || !userInfo.lastName || !userInfo.gender || isLoadingQuestionnaire || !!loadingError}
+                        disabled={!selectedAge || !userInfo.firstName || !userInfo.lastName || isLoadingQuestionnaire || !!loadingError}
                         style={{
-                            opacity: (selectedAge && userInfo.firstName && userInfo.lastName && userInfo.gender && !isLoadingQuestionnaire && !loadingError) ? 1 : 0.5,
-                            cursor: (selectedAge && userInfo.firstName && userInfo.lastName && userInfo.gender && !isLoadingQuestionnaire && !loadingError) ? 'pointer' : 'not-allowed'
+                            opacity: (selectedAge && userInfo.firstName && userInfo.lastName && !isLoadingQuestionnaire && !loadingError) ? 1 : 0.5,
+                            cursor: (selectedAge && userInfo.firstName && userInfo.lastName && !isLoadingQuestionnaire && !loadingError) ? 'pointer' : 'not-allowed'
                         }}
                         onClick={handleStartQuestionnaire}
                     >
