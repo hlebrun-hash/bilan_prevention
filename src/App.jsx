@@ -280,17 +280,25 @@ function App() {
                                         gender: userInfo.gender
                                     })
                                         .then(analysisResult => {
+                                            console.log("📝 Analyse générée, mise à jour dans Supabase...", {
+                                                bilanId: bilanId,
+                                                analysisLength: analysisResult.length
+                                            });
                                             // Mettre à jour le bilan avec l'analyse générée
                                             return supabase
                                                 .from('bilans')
                                                 .update({ analysis: analysisResult })
                                                 .eq('id', bilanId);
                                         })
-                                        .then(() => {
+                                        .then((updateResult) => {
+                                            console.log("📊 Résultat de la mise à jour Supabase:", updateResult);
+                                            if (updateResult.error) {
+                                                throw new Error(`Erreur Supabase update: ${updateResult.error.message}`);
+                                            }
                                             console.log("✅ Analyse Mistral générée et sauvegardée avec succès");
                                         })
                                         .catch(mistralError => {
-                                            console.error("❌ Erreur lors de la génération de l'analyse Mistral:", mistralError);
+                                            console.error("❌ Erreur lors de la génération/sauvegarde de l'analyse Mistral:", mistralError);
                                             alert("⚠️ Votre bilan a été enregistré, mais l'analyse automatique n'a pas pu être générée. Le pharmacien pourra quand même consulter vos réponses.");
                                         });
                                 }
