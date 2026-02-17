@@ -5,7 +5,13 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 if (!supabaseUrl || !supabaseAnonKey) {
-    console.warn("Attention: Les identifiants Supabase sont manquants dans le fichier .env")
+    console.error("⚠️ ERREUR CRITIQUE: Les identifiants Supabase sont manquants!")
+    console.error("VITE_SUPABASE_URL:", supabaseUrl)
+    console.error("VITE_SUPABASE_ANON_KEY:", supabaseAnonKey ? "défini" : "undefined")
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Utiliser des valeurs par défaut pour éviter le crash (mais ça ne fonctionnera pas pour de vrai)
+export const supabase = createClient(
+    supabaseUrl || 'https://placeholder.supabase.co',
+    supabaseAnonKey || 'placeholder-key'
+)
