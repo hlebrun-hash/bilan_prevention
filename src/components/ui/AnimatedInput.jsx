@@ -91,7 +91,7 @@ export const AnimatedInput = ({
 
             <input
                 id={inputId}
-                type="text"
+                type={props.type || "text"}
                 value={value}
                 onChange={onChange}
                 onFocus={(e) => {

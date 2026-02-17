@@ -380,6 +380,7 @@ function App() {
                                         <AnimatedInput
                                             label={currentQuestion.text}
                                             value={answers[currentQuestion.id] || ''}
+                                            type={currentQuestion.inputType || "text"}
                                             onChange={(e) => setAnswers({ ...answers, [currentQuestion.id]: e.target.value })}
                                         />
                                         <button

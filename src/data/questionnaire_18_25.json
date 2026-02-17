@@ -181,14 +181,16 @@
                 },
                 {
                     "id": "q15",
-                    "text": "Taille (en mètres) :",
+                    "text": "Taille (en cm) :",
                     "type": "text",
+                    "inputType": "number",
                     "required": false
                 },
                 {
                     "id": "q16",
                     "text": "Poids (en kg) :",
                     "type": "text",
+                    "inputType": "number",
                     "required": false
                 },
                 {
