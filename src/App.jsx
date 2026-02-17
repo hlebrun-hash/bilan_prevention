@@ -286,7 +286,7 @@ function App() {
                                 setSelectedAge(null);
                                 setAllQuestions([]);
                                 setCurrentQuestionnaire(null);
-                                setUserInfo({ firstName: '', lastName: '' });
+                                setUserInfo({ firstName: '', lastName: '', gender: '' });
                             }}
                         >
                             Recommencer
