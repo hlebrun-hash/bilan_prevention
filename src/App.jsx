@@ -40,9 +40,16 @@ function App() {
     const [isSending, setIsSending] = useState(false);
     const [sendSuccess, setSendSuccess] = useState(false);
 
+    const [isLoadingQuestionnaire, setIsLoadingQuestionnaire] = useState(false);
+    const [loadingError, setLoadingError] = useState(null);
+
     // Charger le questionnaire quand l'âge est sélectionné
     useEffect(() => {
         if (selectedAge) {
+            setIsLoadingQuestionnaire(true);
+            setLoadingError(null);
+            setAllQuestions([]); // Reset questions pendant chargement
+
             loadQuestionnaire(selectedAge)
                 .then(module => {
                     const questionnaire = module.default;
@@ -50,18 +57,25 @@ function App() {
 
                     // Aplatir toutes les questions
                     const questions = [];
-                    questionnaire.sections.forEach(section => {
-                        section.questions.forEach(question => {
-                            questions.push({
-                                ...question,
-                                sectionTitle: section.title
+                    if (questionnaire && questionnaire.sections) {
+                        questionnaire.sections.forEach(section => {
+                            section.questions.forEach(question => {
+                                questions.push({
+                                    ...question,
+                                    sectionTitle: section.title
+                                });
                             });
                         });
-                    });
-                    setAllQuestions(questions);
+                        setAllQuestions(questions);
+                    } else {
+                        throw new Error("Structure du questionnaire invalide");
+                    }
+                    setIsLoadingQuestionnaire(false);
                 })
                 .catch(error => {
                     console.error('Erreur lors du chargement du questionnaire:', error);
+                    setLoadingError(`Impossible de charger le questionnaire ${selectedAge}. Veuillez réessayer.`);
+                    setIsLoadingQuestionnaire(false);
                 });
         }
     }, [selectedAge]);
@@ -85,15 +99,21 @@ function App() {
     };
 
     const handleStartQuestionnaire = () => {
-        if (selectedAge && userInfo.firstName && userInfo.lastName && allQuestions.length > 0) {
-            setCurrentScreen('questionnaire');
-            // S'assurer de commencer sur une question visible
-            let startIndex = 0;
-            while (startIndex < allQuestions.length && !isQuestionVisible(allQuestions[startIndex], {})) {
-                startIndex++;
-            }
-            setCurrentQuestionIndex(startIndex);
+        if (!selectedAge || !userInfo.firstName || !userInfo.lastName) return;
+
+        if (allQuestions.length === 0) {
+            console.error("Tentative de démarrage mais aucune question chargée.");
+            setLoadingError("Erreur : le questionnaire n'est pas chargé. Veuillez rafraîchir la page.");
+            return;
         }
+
+        setCurrentScreen('questionnaire');
+        // S'assurer de commencer sur une question visible
+        let startIndex = 0;
+        while (startIndex < allQuestions.length && !isQuestionVisible(allQuestions[startIndex], {})) {
+            startIndex++;
+        }
+        setCurrentQuestionIndex(startIndex);
     };
 
     const handleAnswer = (questionId, answer) => {
@@ -550,16 +570,27 @@ function App() {
                         ))}
                     </div>
 
+
+                    {loadingError && (
+                        <div style={{ color: 'var(--color-accent-error)', marginBottom: '1rem', textAlign: 'center' }}>
+                            {loadingError}
+                        </div>
+                    )}
+
                     <button
                         className="button button-primary"
-                        disabled={!selectedAge || !userInfo.firstName || !userInfo.lastName}
+                        disabled={!selectedAge || !userInfo.firstName || !userInfo.lastName || isLoadingQuestionnaire || !!loadingError}
                         style={{
-                            opacity: (selectedAge && userInfo.firstName && userInfo.lastName) ? 1 : 0.5,
-                            cursor: (selectedAge && userInfo.firstName && userInfo.lastName) ? 'pointer' : 'not-allowed'
+                            opacity: (selectedAge && userInfo.firstName && userInfo.lastName && !isLoadingQuestionnaire && !loadingError) ? 1 : 0.5,
+                            cursor: (selectedAge && userInfo.firstName && userInfo.lastName && !isLoadingQuestionnaire && !loadingError) ? 'pointer' : 'not-allowed'
                         }}
                         onClick={handleStartQuestionnaire}
                     >
-                        Commencer mon bilan <ChevronRight style={{ marginLeft: '0.5rem' }} />
+                        {isLoadingQuestionnaire ? (
+                            <span>Chargement du questionnaire...</span>
+                        ) : (
+                            <>Commencer mon bilan <ChevronRight style={{ marginLeft: '0.5rem' }} /></>
+                        )}
                     </button>
                 </div>
 
