@@ -181,16 +181,20 @@
                 },
                 {
                     "id": "q15",
-                    "text": "Taille (en cm) :",
+                    "text": "Taille :",
                     "type": "text",
                     "inputType": "number",
+                    "max": 300,
+                    "unit": "cm",
                     "required": false
                 },
                 {
                     "id": "q16",
-                    "text": "Poids (en kg) :",
+                    "text": "Poids :",
                     "type": "text",
                     "inputType": "number",
+                    "max": 500,
+                    "unit": "kg",
                     "required": false
                 },
                 {

@@ -398,6 +398,8 @@ function App() {
                                             label={currentQuestion.text}
                                             value={answers[currentQuestion.id] || ''}
                                             type={currentQuestion.inputType || "text"}
+                                            max={currentQuestion.max}
+                                            unit={currentQuestion.unit}
                                             onChange={(e) => setAnswers({ ...answers, [currentQuestion.id]: e.target.value })}
                                         />
                                         <button

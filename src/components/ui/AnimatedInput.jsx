@@ -93,7 +93,16 @@ export const AnimatedInput = ({
                 id={inputId}
                 type={props.type || "text"}
                 value={value}
-                onChange={onChange}
+                onChange={(e) => {
+                    const newValue = e.target.value;
+                    // Validation numérique stricte
+                    if (props.type === 'number') {
+                        if (props.max && Number(newValue) > Number(props.max)) return;
+                        if (props.min && Number(newValue) < Number(props.min)) return;
+                        if (newValue.length > 4) return; // Sécurité supplémentaire
+                    }
+                    onChange(e);
+                }}
                 onFocus={(e) => {
                     setIsFocused(true);
                     e.target.style.borderColor = "var(--color-primary)";
@@ -107,6 +116,7 @@ export const AnimatedInput = ({
                     border: "none",
                     borderBottom: "2px solid #E5E5E5",
                     padding: "0.5rem 0",
+                    paddingRight: props.unit ? "2rem" : "0", // Espace pour l'unité
                     width: "100%",
                     fontSize: "1rem",
                     fontWeight: 500,
@@ -126,6 +136,22 @@ export const AnimatedInput = ({
                 }}
                 {...props}
             />
+            {props.unit && (
+                <span style={{
+                    position: "absolute",
+                    right: 0,
+                    top: "50%",
+                    transform: "translateY(-50%)", // Ajustement pour alignement vertical
+                    // Le input a un padding de 0.5rem verticalement, on centre par rapport au conteneur
+                    marginTop: "2px", // Petit ajustement fin
+                    color: "var(--color-text-tertiary)",
+                    pointerEvents: "none",
+                    fontSize: "0.9rem",
+                    fontWeight: 500
+                }}>
+                    {props.unit}
+                </span>
+            )}
         </div>
     );
 };
