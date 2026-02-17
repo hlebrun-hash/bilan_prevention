@@ -182,37 +182,54 @@ function App() {
 
                             setIsSending(true);
                             try {
-                                // Générer l'analyse avec Mistral
-                                let analysisResult = null;
-                                try {
-                                    // Utiliser allQuestions pour avoir le texte des questions
-                                    analysisResult = await generatePharmacistAnalysis(answers, allQuestions, {
-                                        firstName: userInfo.firstName,
-                                        lastName: userInfo.lastName,
-                                        ageRange: currentQuestionnaire?.title
-                                    });
-                                } catch (mistralError) {
-                                    console.error("Erreur Mistral (non bloquante):", mistralError);
-                                }
-
-                                const { error } = await supabase
+                                // 1. ENREGISTRER D'ABORD dans Supabase (rapide, ~100-300ms)
+                                const { data, error } = await supabase
                                     .from('bilans')
                                     .insert({
                                         first_name: userInfo.firstName,
                                         last_name: userInfo.lastName,
                                         age_range: currentQuestionnaire?.title,
                                         answers: answers,
-                                        analysis: analysisResult // Sauvegarder l'analyse générée
-                                    });
+                                        analysis: null // On mettra à jour plus tard
+                                    })
+                                    .select();
 
                                 if (error) throw error;
 
+                                // 2. Afficher immédiatement le succès à l'utilisateur
                                 setSendSuccess(true);
+                                setIsSending(false);
                                 alert("Votre bilan a bien été enregistré !");
+
+                                // 3. Générer l'analyse Mistral EN ARRIÈRE-PLAN (non bloquant)
+                                // L'utilisateur n'a pas besoin d'attendre
+                                if (data && data[0]) {
+                                    const bilanId = data[0].id;
+
+                                    // Lancer l'analyse en arrière-plan sans bloquer
+                                    generatePharmacistAnalysis(answers, allQuestions, {
+                                        firstName: userInfo.firstName,
+                                        lastName: userInfo.lastName,
+                                        ageRange: currentQuestionnaire?.title
+                                    })
+                                        .then(analysisResult => {
+                                            // Mettre à jour le bilan avec l'analyse générée
+                                            return supabase
+                                                .from('bilans')
+                                                .update({ analysis: analysisResult })
+                                                .eq('id', bilanId);
+                                        })
+                                        .then(() => {
+                                            console.log("✅ Analyse Mistral générée et sauvegardée avec succès");
+                                        })
+                                        .catch(mistralError => {
+                                            console.warn("⚠️ L'analyse automatique n'a pas pu être générée (non critique):", mistralError);
+                                        });
+                                }
+
                             } catch (error) {
                                 console.error('Erreur lors de l\'envoi:', error);
                                 alert(`Une erreur est survenue lors de l'envoi: ${error.message || error.details || JSON.stringify(error)}. Veuillez vérifier votre connexion et vos identifiants.`);
-                            } finally {
                                 setIsSending(false);
                             }
                         }}
