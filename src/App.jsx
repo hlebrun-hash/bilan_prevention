@@ -31,7 +31,7 @@ const ageRanges = [
 
 function App() {
     const [selectedAge, setSelectedAge] = useState(null);
-    const [userInfo, setUserInfo] = useState({ firstName: '', lastName: '' });
+    const [userInfo, setUserInfo] = useState({ firstName: '', lastName: '', gender: '' });
     const [currentScreen, setCurrentScreen] = useState('home');
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState({});
@@ -83,6 +83,11 @@ function App() {
 
     // Helper pour vérifier si une question doit être affichée
     const isQuestionVisible = (question, currentAnswers) => {
+        // Filtrage par sexe
+        if (question.gender && question.gender !== userInfo.gender) {
+            return false;
+        }
+
         if (!question.condition) return true;
 
         const dependentAnswer = currentAnswers[question.condition.questionId];
@@ -99,7 +104,7 @@ function App() {
     };
 
     const handleStartQuestionnaire = () => {
-        if (!selectedAge || !userInfo.firstName || !userInfo.lastName) return;
+        if (!selectedAge || !userInfo.firstName || !userInfo.lastName || !userInfo.gender) return;
 
         if (allQuestions.length === 0) {
             console.error("Tentative de démarrage mais aucune question chargée.");
@@ -524,50 +529,91 @@ function App() {
                                 onChange={(e) => setUserInfo({ ...userInfo, lastName: e.target.value })}
                             />
                         </div>
+
+                        {/* Sélecteur de Genre */}
+                        <div style={{ marginTop: '1.5rem' }}>
+                            <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: 500, marginBottom: '0.75rem', color: 'var(--color-text-secondary)' }}>
+                                Sexe *
+                            </label>
+                            <div style={{ display: 'flex', gap: '1rem' }}>
+                                {[
+                                    { value: 'Homme', label: 'Homme' },
+                                    { value: 'Femme', label: 'Femme' }
+                                ].map((option) => (
+                                    <button
+                                        key={option.value}
+                                        className={`button-secondary ${userInfo.gender === option.value ? 'active' : ''}`}
+                                        style={{
+                                            padding: '0.75rem 1rem',
+                                            borderColor: userInfo.gender === option.value ? 'var(--color-accent-success)' : '#E5E5E5',
+                                            backgroundColor: userInfo.gender === option.value ? 'rgba(124, 152, 133, 0.1)' : 'transparent',
+                                            color: userInfo.gender === option.value ? 'var(--color-accent-success)' : 'var(--color-text-secondary)',
+                                            fontWeight: userInfo.gender === option.value ? 600 : 400,
+                                            flex: 1,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '0.5rem'
+                                        }}
+                                        onClick={() => setUserInfo({ ...userInfo, gender: option.value })}
+                                    >
+                                        {option.label}
+                                        {userInfo.gender === option.value && (
+                                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'currentColor' }} />
+                                        )}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
 
+                    {/* Section Sélection Âge */}
+                    <div style={{ marginBottom: '2.5rem' }}>
+                        <h2 style={{ fontSize: '1.25rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <Calendar size={20} color="var(--color-accent-success)" />
+                            Quel est votre âge ?
+                        </h2>
 
-                    <h2 style={{ fontSize: '1.25rem', marginBottom: '1.5rem' }}>Sélectionnez votre tranche d'âge :</h2>
-
-                    <div style={{ display: 'grid', gap: '1rem', marginBottom: '2rem' }}>
-                        {ageRanges.map((range) => (
-                            <button
-                                key={range.id}
-                                className="button-secondary"
-                                style={{
-                                    textAlign: 'left',
-                                    padding: '1.25rem',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    borderColor: selectedAge === range.id ? 'var(--color-accent-success)' : 'var(--color-text-tertiary)',
-                                    backgroundColor: selectedAge === range.id ? 'rgba(124, 152, 133, 0.1)' : 'transparent',
-                                    color: selectedAge === range.id ? 'var(--color-accent-success)' : 'var(--color-text-primary)'
-                                }}
-                                onClick={() => setSelectedAge(range.id)}
-                            >
-                                <span style={{ fontSize: '1.1rem', fontWeight: 500 }}>{range.label}</span>
-                                <div style={{
-                                    width: '24px',
-                                    height: '24px',
-                                    borderRadius: '50%',
-                                    border: '2px solid currentColor',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}>
-                                    {selectedAge === range.id && (
-                                        <div style={{
-                                            width: '12px',
-                                            height: '12px',
-                                            borderRadius: '50%',
-                                            backgroundColor: 'currentColor'
-                                        }} />
-                                    )}
-                                </div>
-                            </button>
-                        ))}
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' }}>
+                            {ageRanges.map((range) => (
+                                <button
+                                    key={range.id}
+                                    className="button-secondary"
+                                    style={{
+                                        textAlign: 'left',
+                                        padding: '1.25rem',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                        borderColor: selectedAge === range.id ? 'var(--color-accent-success)' : 'var(--color-text-tertiary)',
+                                        backgroundColor: selectedAge === range.id ? 'rgba(124, 152, 133, 0.1)' : 'transparent',
+                                        color: selectedAge === range.id ? 'var(--color-accent-success)' : 'var(--color-text-primary)'
+                                    }}
+                                    onClick={() => setSelectedAge(range.id)}
+                                >
+                                    <span style={{ fontSize: '1.1rem', fontWeight: 500 }}>{range.label}</span>
+                                    <div style={{
+                                        width: '24px',
+                                        height: '24px',
+                                        borderRadius: '50%',
+                                        border: '2px solid currentColor',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        {selectedAge === range.id && (
+                                            <div style={{
+                                                width: '12px',
+                                                height: '12px',
+                                                borderRadius: '50%',
+                                                backgroundColor: 'currentColor'
+                                            }} />
+                                        )}
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
 
@@ -579,10 +625,10 @@ function App() {
 
                     <button
                         className="button button-primary"
-                        disabled={!selectedAge || !userInfo.firstName || !userInfo.lastName || isLoadingQuestionnaire || !!loadingError}
+                        disabled={!selectedAge || !userInfo.firstName || !userInfo.lastName || !userInfo.gender || isLoadingQuestionnaire || !!loadingError}
                         style={{
-                            opacity: (selectedAge && userInfo.firstName && userInfo.lastName && !isLoadingQuestionnaire && !loadingError) ? 1 : 0.5,
-                            cursor: (selectedAge && userInfo.firstName && userInfo.lastName && !isLoadingQuestionnaire && !loadingError) ? 'pointer' : 'not-allowed'
+                            opacity: (selectedAge && userInfo.firstName && userInfo.lastName && userInfo.gender && !isLoadingQuestionnaire && !loadingError) ? 1 : 0.5,
+                            cursor: (selectedAge && userInfo.firstName && userInfo.lastName && userInfo.gender && !isLoadingQuestionnaire && !loadingError) ? 'pointer' : 'not-allowed'
                         }}
                         onClick={handleStartQuestionnaire}
                     >
