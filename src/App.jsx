@@ -1,6 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, ChevronRight, ChevronLeft, Check, CheckCircle, Stethoscope, User, Loader2 } from 'lucide-react';
+import { Shield, ChevronRight, ChevronLeft, Check, CheckCircle, Stethoscope, User, Loader2, Calendar } from 'lucide-react';
 import { AnimatedInput } from './components/ui/AnimatedInput';
 import { supabase } from './lib/supabase';
 import { generatePharmacistAnalysis } from './lib/mistral';
