@@ -104,7 +104,7 @@ function App() {
     };
 
     const handleStartQuestionnaire = () => {
-        if (!selectedAge || !userInfo.firstName || !userInfo.lastName || !userInfo.gender) return;
+        if (!selectedAge || !userInfo.firstName || !userInfo.lastName) return;
 
         if (allQuestions.length === 0) {
             console.error("Tentative de démarrage mais aucune question chargée.");
@@ -125,11 +125,49 @@ function App() {
         const newAnswers = { ...answers, [questionId]: answer };
         setAnswers(newAnswers);
 
+        // Mise à jour automatique du genre si la question est Q1 ou concerne le sexe
+        if (questionId === 'q1' || questionId === 'sex' || questionId === 'gender') {
+            let detectedGender = '';
+            if (typeof answer === 'string') {
+                if (answer.toLowerCase().includes('femme')) detectedGender = 'Femme';
+                else if (answer.toLowerCase().includes('homme')) detectedGender = 'Homme';
+            } else if (Array.isArray(answer)) {
+                if (answer.some(a => a.toLowerCase().includes('femme'))) detectedGender = 'Femme';
+                else if (answer.some(a => a.toLowerCase().includes('homme'))) detectedGender = 'Homme';
+            }
+
+            if (detectedGender) {
+                console.log("Genre détecté et mis à jour :", detectedGender);
+                setUserInfo(prev => ({ ...prev, gender: detectedGender }));
+            }
+        }
+
         // Passer à la question suivante après un court délai
         setTimeout(() => {
             let nextIndex = currentQuestionIndex + 1;
             // Trouver la prochaine question visible
-            while (nextIndex < allQuestions.length && !isQuestionVisible(allQuestions[nextIndex], newAnswers)) {
+            // Note: On utilise newAnswers, mais pour le genre il faut utiliser detectedGender ou attendre le state update
+            // Comme le state update est asynchrone, on va passer le genre explicitement à isQuestionVisible si besoin, 
+            // ou mieux, on recalcule le genre localement pour le filtre
+
+            let tempUserInfo = { ...userInfo };
+            if (questionId === 'q1' || questionId === 'sex') {
+                if (String(answer).toLowerCase().includes('femme')) tempUserInfo.gender = 'Femme';
+                else if (String(answer).toLowerCase().includes('homme')) tempUserInfo.gender = 'Homme';
+            }
+
+            // Fonction locale pour vérifier la visibilité avec le genre mis à jour instantanément
+            const checkVisibility = (q) => {
+                if (q.gender && q.gender !== tempUserInfo.gender && tempUserInfo.gender) return false;
+                // Reste de la logique isQuestionVisible...
+                if (!q.condition) return true;
+                const depAnswer = newAnswers[q.condition.questionId];
+                if (depAnswer === undefined) return false;
+                if (Array.isArray(depAnswer)) return depAnswer.includes(q.condition.value);
+                return depAnswer === q.condition.value;
+            };
+
+            while (nextIndex < allQuestions.length && !checkVisibility(allQuestions[nextIndex])) {
                 nextIndex++;
             }
 
@@ -531,41 +569,7 @@ function App() {
                             />
                         </div>
 
-                        {/* Sélecteur de Genre */}
-                        <div style={{ marginTop: '1.5rem' }}>
-                            <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: 500, marginBottom: '0.75rem', color: 'var(--color-text-secondary)' }}>
-                                Sexe *
-                            </label>
-                            <div style={{ display: 'flex', gap: '1rem' }}>
-                                {[
-                                    { value: 'Homme', label: 'Homme' },
-                                    { value: 'Femme', label: 'Femme' }
-                                ].map((option) => (
-                                    <button
-                                        key={option.value}
-                                        className={`button-secondary ${userInfo.gender === option.value ? 'active' : ''}`}
-                                        style={{
-                                            padding: '0.75rem 1rem',
-                                            borderColor: userInfo.gender === option.value ? 'var(--color-accent-success)' : '#E5E5E5',
-                                            backgroundColor: userInfo.gender === option.value ? 'rgba(124, 152, 133, 0.1)' : 'transparent',
-                                            color: userInfo.gender === option.value ? 'var(--color-accent-success)' : 'var(--color-text-secondary)',
-                                            fontWeight: userInfo.gender === option.value ? 600 : 400,
-                                            flex: 1,
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            gap: '0.5rem'
-                                        }}
-                                        onClick={() => setUserInfo({ ...userInfo, gender: option.value })}
-                                    >
-                                        {option.label}
-                                        {userInfo.gender === option.value && (
-                                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'currentColor' }} />
-                                        )}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
+                        {/* Sélecteur de Genre supprimé à la demande de l'utilisateur */}
                     </div>
 
 

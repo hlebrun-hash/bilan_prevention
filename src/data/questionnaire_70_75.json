@@ -7,6 +7,16 @@
             "title": "Situation Personnelle, Environnement Social et Familial",
             "questions": [
                 {
+                    "id": "q1",
+                    "text": "Vous êtes :",
+                    "type": "multiple",
+                    "options": [
+                        "Une femme",
+                        "Un homme"
+                    ],
+                    "required": true
+                },
+                {
                     "id": "q2",
                     "text": "Assumez-vous un rôle d'aidant ? Aidez-vous une personne de manière régulière et fréquente, en raison de son âge, de la maladie ou d'une situation de handicap ?",
                     "type": "boolean",
